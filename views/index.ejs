@@ -1,0 +1,18 @@
+<%- include('header') %>
+<body>
+  <div class="container">
+  <h1>SHOPR</h1>
+  <h3>One Stop Shop for making Your House Radiant</h3>
+  <div class="product-item"></div>
+  <% for(let i= 0; i < product.length; i++) {%>
+    <a href="/products/<%= product[i]._id %>">
+      <img src="<%= product[i].imgURL[0] %>" alt="<%= product[i].name %>" class="product-image">
+    </a>
+      <h2 class="product-name"><%= product[i].name %></h2>
+      <p class="product-price">$<%= product[i].price %></p>
+      <% } %>
+    </div>
+</div>
+</body>
+
+<%- include('footer') %>

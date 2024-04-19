@@ -1,0 +1,61 @@
+<%- include('header') %>
+
+<body>
+  <div class="container">
+    <h4> <a href="/products"> &lt; Home Page</a></h4>
+    <h1 class="product-title"><%= product.name; %></h1>
+    
+    <div class="product-details">
+      <img
+        src="<%= product.imgURL[0] %>"
+        alt="<%= product.name %>"
+        class="product-image"
+      />
+      
+      <div class="details">
+        <p class="product-price">Price: <%=product.price %></p>
+        <p class="product-description"><%=product.description%></p>
+        <button class="buy-button">Buy Now</button>
+      </div>
+    </div>
+    
+    <div class="reviews-section">
+      <h2>Customer Reviews</h2>
+      <button class="add-review-button">
+        <a href="/products/<%=product._id%>/new-review">Add New Review</a>
+      </button>
+      <ul class="review-list">
+        <% if (allReviews) { %> 
+          <% for(let i = 0; i < allReviews.length; i++) { %>
+            <li class="review-item">
+              <p class="username">Username</p>
+              <p class="review-text"><%= allReviews[i].content%></p>
+              <p>Rtaing: <%=allReviews[i].rating%></p>
+              <div class="button-container">
+                <button class="edit-button">
+                  <a href="/products/<%=product._id%>/<%=allReviews[i]._id%>/edit">
+                    Edit
+                  </a>
+                </button>
+                <form action="/products/<%=product._id%>?_method=DELETE" method="POST">
+                  <input type="hidden" name="_id" value="<%=allReviews[i]._id%>" />
+                  <input type="submit" value="Delete" class="delete-button" onclick="return confirmDelete();"/>
+                </form>
+              </div>
+            </li>
+          <% } %> 
+        <% } else { %>
+          <li class="no-reviews">No reviews available</li>
+        <% } %>
+      </ul>
+    </div>
+
+  </div>
+</body>
+<script>
+  function confirmDelete() {
+    return confirm('Are you sure you want to delete this review?');
+  }
+</script>
+  <%- include('footer') %>
+

@@ -4,8 +4,28 @@ const Product = require('../models/products');
 const Review = require('../models/reviews');
 
 
-//Index Route
+//New Route for Review
+router.get('/:id/newReview', async (req, res) => {
+  const foundProduct = await Product.findById(req.params.id);
+  res.render('newReview.ejs', {
+    product: foundProduct
+  })
+});
 
+// Create Route for Review
+router.post('/:id', async (req, res) => {
+  const productId = req.body.productId;
+  try {
+    const newReview = await Review.create(req.body);
+    res.redirect(`/products/${productId}`);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send(err);
+  }
+});
+
+
+//Index Route for all products
 router.get('/', async (req, res) => {
   try {
     const products = await Product.find({});
@@ -19,6 +39,55 @@ router.get('/', async (req, res) => {
   }
 });
 
+
+//Edit Route for Review
+router.get('/:id/:reviewId/edit', async (req, res) => {
+  const foundProduct = await Product.findById(req.params.id);
+  const reviewId = req.params.reviewId;
+  let selectedReview = await Review.find({_id: reviewId});
+  res.render('edit.ejs', {
+    review: selectedReview,
+    product: foundProduct 
+  });
+});
+
+// Update Route for Review
+router.put('/:id', async (req, res) => {
+  try {
+    const reviewId = req.body._id
+    const updatedReview = await Review.findByIdAndUpdate(reviewId, req.body, {new: true})
+    res.redirect(`/products/${req.params.id}`)
+  } catch (err) {
+    console.log("ERROR IN EDIT ROUTE: ", err)
+    res.status(500).send(err)
+  }
+})
+
+//Delete Route for Review
+router.delete('/:id', async (req, res) => {
+  try {
+   
+    const deletedReview = await Review.findByIdAndDelete(req.body._id);
+    if (!deletedReview) {
+      return res.status(404).send('Review not found');
+    }
+    
+    res.redirect(`/products/${req.params.id}`);
+  } catch (err) {
+    res.status(500).send('Error deleting review');
+  }
+});
+
+// Show route for products
+router.get('/:id', async (req, res) => {
+  const foundProduct = await Product.findById(req.params.id);
+  const reviews = await Review.find({productId: foundProduct._id})
+  // reviews is an array of objects with a given product id
+  res.render('show.ejs', {
+    product: foundProduct,
+    allReviews: reviews
+  });
+});
 
 //Seed data for products
 router.get('/seed', async (req, res)=>{
@@ -346,60 +415,7 @@ router.get('/addNewReviews', async (req, res)=>{
 })
 
 
-//Edit review route
-
-router.get('/:id/:reviewId/edit', async (req, res) => {
-  const foundProduct = await Product.findById(req.params.id);
-  const reviewId = req.params.reviewId;
-  let selectedReview = await Review.find({_id: reviewId});
-  res.render('edit.ejs', {
-    review: selectedReview,
-    product: foundProduct 
-  });
-});
-
-// Update review route
-router.put('/:id', async (req, res) => {
-  try {
-    const reviewId = req.body._id
-    const updatedReview = await Review.findByIdAndUpdate(reviewId, req.body, {new: true})
-    console.log(updatedReview)
-    res.redirect(`/products/${req.params.id}`)
-  } catch (err) {
-    console.log("ERROR IN EDIT ROUTE: ", err)
-    res.status(500).send(err)
-  }
-})
-
-//Delete Review Route
-
-router.delete('/:id', async (req, res) => {
-  try {
-   
-    const deletedReview = await Review.findByIdAndDelete(req.body._id);
-    if (!deletedReview) {
-      return res.status(404).send('Review not found');
-    }
-    
-    res.redirect(`/products/${req.params.id}`);
-  } catch (err) {
-    res.status(500).send('Error deleting review');
-  }
-});
-
-// Show route for products
-router.get('/:id', async (req, res) => {
-  const foundProduct = await Product.findById(req.params.id);
-  const reviews = await Review.find({productId: foundProduct._id})
-  // reviews is an array of objects with a given product id
-  //pass the entire array to ejs file and run a loop to get the content value and rating.
-  res.render('show.ejs', {
-    product: foundProduct,
-    allReviews: reviews
-  });
-});
-
-// deleting every product record
+// Deleting all reviews
 // router.get('/deleteAll', async (req, res) => {
 //   try {
 //     console.log('TRYING')

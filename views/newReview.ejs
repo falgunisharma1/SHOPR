@@ -1,0 +1,13 @@
+<%- include('header') %>
+
+<body>
+  <h1>Write a new Review for <%=product.name%></h1>
+  <form action="/products/<%=product._id%>" method="POST">
+    <input type="hidden" name="productId" value="<%=product._id%>"/>
+      Content: <input type="text" name="content" /><br/>
+      Rating: <input type="Number" name="rating" step="1" /><br/>
+      <input type="submit" name="" value="Submit Review"/>
+  </form>
+</body>
+
+<%- include('footer') %> 

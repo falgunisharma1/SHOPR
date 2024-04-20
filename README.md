@@ -37,6 +37,28 @@ This app is focused on product and their respective reviews. All 7 RESTful route
 <li>As a user, I want to be able to click on delete button on each review and delete that review data. </li>
 <li>As a user, I want to go back to my home page any time I like by just clicking the brand name on top.</li>
 </ul>
+<br />
+
+
+<h2>Unsolved problems</h2>
+<ul>
+ <li>Joining products and reviews data with NOSQL database was a small challenge and would like to find a more efficient way of finding it.</li>
+ <li>MongoDB had some issues while deployment as it was not accepting schemas and led to more problems while rendering data. Fixed it as of now but need to find the real issue soon</li>
+ <li>Accessing some data passed to ejs file through an HTTPS request, in a script is a nightmare. Parsing and reformatting is the only way I could find. </li>
+</ul>
+<br />
+
+<h2>Future Goals</h2>
+<ul>
+ <li>Buying functionality</li>
+ <li>Sorting products and reviews</li>
+ <li>Login/logout functionality</li>
+ </ul>
+ <br />
+
+
+ Check out the app :)  - [SHOPR](https://shopr-name-ef2a29e1cae1.herokuapp.com/products)
+
 
 
 

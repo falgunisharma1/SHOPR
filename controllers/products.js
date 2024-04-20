@@ -25,8 +25,10 @@ router.post("/:id", async (req, res) => {
 
 //Index Route for all products
 router.get("/", async (req, res) => {
+  
   try {
     const products = await Product.find({});
+    console.log(products)
     res.render("index.ejs", {
       product: products,
     });

@@ -1,13 +1,30 @@
 <%- include('header') %>
 
 <body>
-  <h1>Write a new Review for <%=product.name%></h1>
-  <form action="/products/<%=product._id%>" method="POST">
-    <input type="hidden" name="productId" value="<%=product._id%>"/>
-      Content: <input type="text" name="content" /><br/>
-      Rating: <input type="Number" name="rating" step="1" /><br/>
-      <input type="submit" name="" value="Submit Review"/>
-  </form>
+  <div class="newReviewPage">
+    <div class="pageHeadings2">
+      <h1 class="home-page-button"><a href="/products"> SHOPR</a></h1>
+      <h3>One Stop for making Your House Radiant</h3>
+    </div>
+    <div class="container3">
+      <h1>Write a new Review for <%=product.name%></h1>
+      <form class="new-edit-review" action="/products/<%=product._id%>" method="POST">
+        <input type="hidden" name="productId" value="<%=product._id%>"/>
+        
+        <div class="form-group">
+          <label for="content">Content:</label>
+          <input class="content input-field" type="text" name="content" />
+        </div>
+        
+        <div class="form-group">
+          <label for="rating">Rating:</label>
+          <input class="ratingForm input-field" type="number" name="rating" step="1" />
+        </div>
+        
+        <input type="submit" value="Submit Review" class="submit-button"/>
+      </form>
+    </div>
+  </div>
 </body>
 
-<%- include('footer') %> 
+<%- include('footer') %>

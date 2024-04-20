@@ -1,14 +1,30 @@
 <%- include('header') %>
+
 <body>
-  <h1>Update your Review</h1>
-  <form action="/products/<%=product._id%>?_method=PUT" method="POST">
-    <input type="hidden" name="_id" value="<%=review[0]._id%>" />
-    Content:
-    <input type="text" name="content" value="<%=review[0].content%>" /><br />
-    Rating: <input type="number" name="rating" value="<%=review[0].rating%>" step="1"/>
-    <br />
-    <input type="submit" value="Submit Changes" />
-  </form>
+  <div class="newReviewPage">
+    <div class="pageHeadings2">
+      <h1 class="home-page-button"><a href="/products"> SHOPR</a></h1>
+      <h3>One Stop for making Your House Radiant</h3>
+    </div>
+    <div class="container3">
+      <h1>Update your Review</h1>
+      <form class="new-edit-review" action="/products/<%=product._id%>?_method=PUT" method="POST">
+        <input type="hidden" name="_id" value="<%=review[0]._id%>" />
+        
+        <div class="form-group">
+          <label for="content">Content:</label>
+          <input class="content input-field" type="text" name="content" value="<%=review[0].content%>" />
+        </div>
+        
+        <div class="form-group">
+          <label for="rating">Rating:</label>
+          <input class="ratingForm input-field" type="number" name="rating" value="<%=review[0].rating%>" step="1" />
+        </div>
+        
+        <input type="submit" value="Submit Changes" class="submit-button"/>
+      </form>
+    </div>
+  </div>
 </body>
 
 <%- include('footer') %>

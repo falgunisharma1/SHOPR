@@ -17,16 +17,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.use(express.static('public'));
 
-
-// // Session Middleware
-// app.use(
-//   session({
-//     secret: process.env.SECRET,
-//     resave: false,
-//     saveUninitialized: false
-//   })
-// );
-
 // Connect to MongoDB
 const mongoURI = process.env.MONGO_URI;
 mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -40,8 +30,6 @@ db.once('open', () => console.log('MongoDB connected'));
 const productsController = require('./controllers/products.js');
 app.use('/products', productsController);
 
-const userController = require('./controllers/users.js');
-app.use('/users', userController);
 
 // Start the server
 app.listen(PORT, () => {

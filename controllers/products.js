@@ -25,10 +25,8 @@ router.post("/:id", async (req, res) => {
 
 //Index Route for all products
 router.get("/", async (req, res) => {
-  
   try {
     const products = await Product.find({});
-    console.log(products)
     res.render("index.ejs", {
       product: products,
     });
@@ -201,54 +199,54 @@ router.get("/seed", async (req, res) => {
 router.get("/addNewReviews", async (req, res) => {
   const reviews = await Review.create([
     {
-      productId: "66209d1074148a7ec8db700e",
+      productId: "66238b9ac1cfc933c9b6234a",
       content:
         "Absolutely stunning sofa! The design is luxurious and it is incredibly comfortable.",
       rating: 5,
     },
     {
-      productId: "66209d1074148a7ec8db700e",
+      productId: "66238b9ac1cfc933c9b6234a",
       content: "The color is beautiful but the fabric stains easily.",
       rating: 4,
     },
     {
-      productId: "66209d1074148a7ec8db700e",
+      productId: "66238b9ac1cfc933c9b6234a",
       content: "The assembly was a bit challenging but worth it.",
       rating: 4.5,
     },
     {
-      productId: "66209d1074148a7ec8db700e",
+      productId: "66238b9ac1cfc933c9b6234a",
       content: "The sofa adds a touch of elegance to my living room.",
       rating: 5,
     },
     {
-      productId: "66209d1074148a7ec8db700e",
+      productId: "66238b9ac1cfc933c9b6234a",
       content: "I wish it came with better care instructions.",
       rating: 3.5,
     },
     {
-      productId: "66209d1074148a7ec8db700f",
+      productId: "66238d1ffb851e7b4a463fbf",
       content:
         "Beautiful dining table that adds an elegant touch to my dining room.",
       rating: 4.5,
     },
     {
-      productId: "66209d1074148a7ec8db700f",
+      productId: "66238d1ffb851e7b4a463fbf",
       content: "The table wobbles a bit, but it's manageable.",
       rating: 3.5,
     },
     {
-      productId: "66209d1074148a7ec8db700f",
+      productId: "66238d1ffb851e7b4a463fbf",
       content: "The finish is lovely and matches my decor perfectly.",
       rating: 4.7,
     },
     {
-      productId: "66209d1074148a7ec8db700f",
+      productId: "66238d1ffb851e7b4a463fbf",
       content: "Assembly was straightforward with two people.",
       rating: 4,
     },
     {
-      productId: "66209d1074148a7ec8db700f",
+      productId: "66238d1ffb851e7b4a463fbf",
       content: "A few minor scratches were present upon arrival.",
       rating: 3,
     },
@@ -463,16 +461,5 @@ router.get("/addNewReviews", async (req, res) => {
   ]);
   res.redirect("/products");
 });
-
-// Deleting all reviews
-// router.get('/deleteAll', async (req, res) => {
-//   try {
-//     console.log('TRYING')
-//     await Review.deleteMany({});
-//     res.send('All reviews deleted');
-//   } catch (err) {
-//     res.status(500).send('Error deleting products');
-//   }
-// });
 
 module.exports = router;

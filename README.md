@@ -18,6 +18,7 @@ It's an app for buying all kinds of limited edition luxiours furniture. Consumer
 <li>MongoDB</li>
 <li>EJS</li>
 <li>Node.js</li>
+<li>Heroku</li>
  </ul>
 <br/>
 

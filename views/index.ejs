@@ -1,15 +1,29 @@
 <%- include('header') %>
 <body>
   <div class="container">
+  <div class="pageHeadings">
   <h1>SHOPR</h1>
   <h3>One Stop Shop for making Your House Radiant</h3>
-  <div class="product-item"></div>
+</div>
+  <div class="container2">
+    <div class="textOnImage">
+      <h2>Conversation Starter</h2>
+   
+    </div>
+  </div>
+  <div class="brandMessage">
+     <h4>Elevate Your Living: Timeless Luxury, Exceptional Craftsmanship</h4>
+  </div>
+  
+  <div class="productDetails">
   <% for(let i= 0; i < product.length; i++) {%>
+    <div class="product-item">
     <a href="/products/<%= product[i]._id %>">
       <img src="<%= product[i].imgURL[0] %>" alt="<%= product[i].name %>" class="product-image">
     </a>
       <h2 class="product-name"><%= product[i].name %></h2>
       <p class="product-price">$<%= product[i].price %></p>
+    </div>
       <% } %>
     </div>
 </div>

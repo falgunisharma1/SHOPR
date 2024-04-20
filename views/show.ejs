@@ -2,60 +2,137 @@
 
 <body>
   <div class="container">
-    <h4> <a href="/products"> &lt; Home Page</a></h4>
-    <h1 class="product-title"><%= product.name; %></h1>
-    
+    <div class="pageHeadings2">
+      <h1 class="home-page-button"><a href="/products"> SHOPR</a></h1>
+      <h3>One Stop for making Your House Radiant</h3>
+    </div>
+
     <div class="product-details">
-      <img
-        src="<%= product.imgURL[0] %>"
-        alt="<%= product.name %>"
-        class="product-image"
-      />
-      
+      <div class="product-image-showPage">
+        <div class="move-button">
+          <button id="left-button">&lt;</button>
+        </div>
+        <div class="imageCarousel">
+          <img
+            id="furIamge"
+            src="<%= product.imgURL[0] %>"
+            alt="<%= product.name %>"
+          />
+        </div>
+        <div class="move-button"><button id="right-button">&gt;</button></div>
+      </div>
       <div class="details">
-        <p class="product-price">Price: <%=product.price %></p>
+        <h1 class="product-title"><%= product.name; %></h1>
+        <p class="product-price">Price: $<%=product.price %></p>
+        <%let averageRating;%> <%let sum = 0;%> <%for(let i=0; i <
+        allReviews.length;i++){%> <% sum = sum + allReviews[i].rating%> <%}%> <%
+        averageRating = sum / allReviews.length%> <% function roundToHalf(value)
+        {%> <%return Math.round(value * 2) / 2;%> <%}%> <%averageRating =
+        roundToHalf(averageRating);%>
+        <p class="rating">Rating: <%=averageRating%>/5</p>
+        <br />
+        <p>Product Description:</p>
         <p class="product-description"><%=product.description%></p>
         <button class="buy-button">Buy Now</button>
+        <button class="review-button">
+          <a href="/products/<%=product._id%>/newReview"
+            >Write a product review</a
+          >
+        </button>
       </div>
     </div>
-    
+
     <div class="reviews-section">
       <h2>Customer Reviews</h2>
-      <button class="add-review-button">
-        <a href="/products/<%=product._id%>/newReview">Add New Review</a>
-      </button>
+
       <ul class="review-list">
-        <% if (allReviews) { %> 
-          <% for(let i = 0; i < allReviews.length; i++) { %>
-            <li class="review-item">
-              <p class="username">Username</p>
-              <p class="review-text"><%= allReviews[i].content%></p>
-              <p>Rtaing: <%=allReviews[i].rating%></p>
-              <div class="button-container">
-                <button class="edit-button">
-                  <a href="/products/<%=product._id%>/<%=allReviews[i]._id%>/edit">
-                    Edit
-                  </a>
-                </button>
-                <form action="/products/<%=product._id%>?_method=DELETE" method="POST">
-                  <input type="hidden" name="_id" value="<%=allReviews[i]._id%>" />
-                  <input type="submit" value="Delete" class="delete-button" onclick="return confirmDelete();"/>
-                </form>
-              </div>
-            </li>
-          <% } %> 
-        <% } else { %>
-          <li class="no-reviews">No reviews available</li>
+        <% if (allReviews) { %> <% for(let i = 0; i < allReviews.length; i++) {
+        %>
+        <li class="review-item">
+          <p class="username">Username</p>
+          <p class="review-text"><%= allReviews[i].content%></p>
+          <p>Rating: <%=allReviews[i].rating%></p>
+          <div class="button-container">
+            <button class="edit-button" id="edit-button">
+              <a href="/products/<%=product._id%>/<%=allReviews[i]._id%>/edit">
+                Edit
+              </a>
+            </button>
+            <form
+              action="/products/<%=product._id%>?_method=DELETE"
+              method="POST"
+            >
+              <input type="hidden" name="_id" value="<%=allReviews[i]._id%>" />
+              <input
+                type="submit"
+                value="Delete"
+                class="delete-button"
+                onclick="return confirmDelete();"
+              />
+            </form>
+          </div>
+        </li>
+        <% } %> <% } else { %>
+        <li class="no-reviews">No reviews available</li>
         <% } %>
       </ul>
     </div>
-
   </div>
+  <div id="product" data-product='<%- JSON.stringify(product) -%>''></div>
 </body>
 <script>
   function confirmDelete() {
-    return confirm('Are you sure you want to delete this review?');
+    return confirm("Are you sure you want to delete this review?");
   }
-</script>
-  <%- include('footer') %>
 
+  let jsonData = document
+    .getElementById("product")
+    .getAttribute("data-product");
+
+  // Replace problematic parts
+  jsonData = jsonData.replace(/" _id":"/g, '{"_id":"');
+  jsonData = jsonData.replace(/","name":"/g, '","name":"');
+  jsonData = jsonData.replace(/","price":/g, '","price":');
+  jsonData = jsonData.replace(/","description":"/g, '","description":"');
+  jsonData = jsonData.replace(/","imgurl":/g, '","imgurl":');
+  jsonData = jsonData.replace(/\["/g, '["');
+  jsonData = jsonData.replace(/"\]"/g, '"]');
+
+  let product = JSON.parse(jsonData);
+  let left = document.getElementById("left-button");
+  let right = document.getElementById("right-button");
+  let furImage = document.getElementById("furIamge");
+  let currentIndex = 0;
+
+  // Left button click for carousel
+  function previousImage() {
+    if (currentIndex > 0) {
+      let prevIndex = currentIndex - 1;
+      furImage.src = product.imgURL[prevIndex];
+      currentIndex = prevIndex; // Update current index
+      right.disabled = false; // Enable right button if it was disabled
+    }
+
+    if (currentIndex === 0) {
+      left.disabled = true; // Disable left button if we are at the beginning
+    }
+  }
+
+  function nextImage() {
+    if (currentIndex < product.imgURL.length - 1) {
+      let nextIndex = currentIndex + 1;
+      furImage.src = product.imgURL[nextIndex];
+      currentIndex = nextIndex; // Update current index
+      left.disabled = false; // Enable left button if it was disabled
+      console.log(currentIndex);
+    }
+
+    if (currentIndex === product.imgURL.length - 1) {
+      right.disabled = true; // Disable right button if we are at the end
+    }
+  }
+
+  left.addEventListener("click", previousImage);
+  right.addEventListener("click", nextImage);
+</script>
+<%- include('footer') %>

@@ -39,9 +39,9 @@ a {
 .container2 {
   background-image: url("https://www.ikea.com/images/in-a-cozy-living-room-are-a-grey-holmsund-sofa-next-to-a-win-338c45600ad349af7b1bce214223efc8.jpg?f=xxxl");
   max-width: 100%;
-  height: 400px; /* Adjust the height as needed */
+  height: 400px; 
   background-size: cover;
-  background-position: center; /* Center the image */
+  background-position: center; 
   background-repeat: no-repeat;
 }
 
@@ -248,28 +248,7 @@ form {
   color: black;
 }
 
-/* New Review Page */
-/* 
-.newReviewPage{
-  background-color: beige;
-  margin-left: 10%;
-  margin-right: 10%;
-}
-
-.container3{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-self: center;
-  align-items: center;
-}
-
-.new-edit-review{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 80%; /* Adjust the width as needed */
-*/ .newReviewPage {
+.newReviewPage {
   background-color: beige;
   margin-left: 10%;
   margin-right: 10%;

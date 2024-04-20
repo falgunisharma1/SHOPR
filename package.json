@@ -1,6 +1,9 @@
 {
   "name": "shopr",
   "version": "1.0.0",
+  "engines": {
+    "node": "v18.19.0"
+  },
   "description": "",
   "main": "index.js",
   "scripts": {

@@ -18,7 +18,7 @@ app.use(methodOverride("_method"));
 app.use(express.static("public"));
 
 // Connect to MongoDB
-const mongoURI = process.env.MONGODB_URI;
+const mongoURI = process.env.MONGO_URI;
 mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 // Check MongoDB connection

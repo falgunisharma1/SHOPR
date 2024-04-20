@@ -57,7 +57,7 @@ This app is focused on product and their respective reviews. All 7 RESTful route
  <br />
 
 
- Check out the app :)  - [SHOPR](https://shopr-name-ef2a29e1cae1.herokuapp.com/products)
+ Check out the app 😊  - [SHOPR](https://shopr-name-ef2a29e1cae1.herokuapp.com/products)
 
 
 

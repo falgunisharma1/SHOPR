@@ -4,6 +4,7 @@ It's a high end online furniture store application.
 
 <h2>Description</h2>
 It's an app for buying all kinds of limited edition luxiours furniture. Consumers are more than welcome to leave a review about the products they bought.
+[SHOPR](https://shopr-name-ef2a29e1cae1.herokuapp.com/products)  ◀️ ◀️ ◀️ Take a tour! 
 <br />
 
 
